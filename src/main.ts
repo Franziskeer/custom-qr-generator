@@ -1,5 +1,5 @@
 import "./style.css";
-import { linkedinQR, githubQR } from "./qr";
+import { linkedinQR, githubQR, portfolioQR } from "./qr";
 
 const app = document.querySelector<HTMLDivElement>("#app")!;
 
@@ -28,6 +28,9 @@ function createContainer(
       case "download-github":
         githubQR.download({ name: buttonId, extension: "png" });
         break;
+      case "download-portfolio":
+        portfolioQR.download({ name: buttonId, extension: "png" });
+        break;
     }
 });
 
@@ -45,11 +48,18 @@ const githubContainer = createContainer(
   "download-github",
   "Descargar GitHub",
 );
+const portfolioContainer = createContainer(
+  "portfolio-container",
+  "download-portfolio",
+  "Descargar Portfolio",
+);
 
 // añadir al DOM
+app.appendChild(portfolioContainer);
 app.appendChild(linkedinContainer);
 app.appendChild(githubContainer);
 
 // render QR
+portfolioQR.append(portfolioContainer);
 linkedinQR.append(linkedinContainer);
 githubQR.append(githubContainer);
